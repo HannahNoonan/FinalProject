@@ -4,7 +4,9 @@ import matplotlib as plt
 
 dataset = pd.read_csv("amazon bestsellers.csv")
 
-print(dataset.head())
+print(dataset)
 
 ### check null values
 print(dataset.isnull().sum())
+
+print(dataset.sort_values("Year"))
