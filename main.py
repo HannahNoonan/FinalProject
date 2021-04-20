@@ -80,6 +80,7 @@ plt.title("Pie Chart of Average Calories per Category")
 plt.ylabel("")
 plt.show()
 
+
 Chicken_and_Fish = 553
 
 if Chicken_and_Fish <= 250 :
@@ -90,16 +91,24 @@ else :
     print("The avg calories in this category is over 500")
 
 
+avg_cals_list = [["Beef & Pork", 494.0],
+                 ["Beverages", 114.0],
+                ["Breakfast", 527.0],
+                 ["Chicken & Fish", 553.0],
+                 ["Coffee & Tea", 284.0],
+                 ["Desserts", 222.0],
+                 ["Salads", 270.0],
+                 ["Smoothies & Shakes",531.0],
+                 ["Snacks & Sides",246.0]]
+for x in avg_cals_list :
+    print("The avg cals in the " + x[0] + " category is " + str(x[1]) + " cals")
 
 
+# 4 sodium
 
+fig, ax = plt.subplots(1,2)
 
-
-
-
-
-
-
-
-
-
+ax[0].scatter(McDonalds_menu['Category'], McDonalds_menu['Sodium'], color='b')
+ax[1].scatter(McDonalds_menu['Category'], McDonalds_menu['Cholesterol'], color='g')
+plt.xticks(rotation=90)
+plt.show()
