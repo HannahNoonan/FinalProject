@@ -46,11 +46,27 @@ Fat_Cals = [1060, 540, 290, 290, 280]
 d = {"Item": Item, "Total_Cals": Total_Cals, "Fat_Cals": Fat_Cals}
 
 Cals_per_top_five = pd.DataFrame(d)
-#print(Cals_per_top_five)
 
-Cals_per_top_five['Perc_Cals_from_Fat'] = (Cals_per_top_five['Fat_Cals'] / Cals_per_top_five['Total_Cals']) *100
-Cals_per_top_five['Perc_Cals_from_Fat'] = np.round(Cals_per_top_five['Perc_Cals_from_Fat'], decimals=2)
+np_TotalCals = np.array(Total_Cals)
+print(np_TotalCals)
+np_FatCals = np.array(Fat_Cals)
+print(np_FatCals)
+
+Cals_per_top_five['Perc_Cals_from_Fat'] = np_FatCals / np_TotalCals *100
+Cals_per_top_five['Perc_Cals_from_Fat'] = np.round(Cals_per_top_five['Perc_Cals_from_Fat'],
+                                                   decimals=2)
+Cals_per_top_five['Perc_Cals_Other'] = 100 - Cals_per_top_five['Perc_Cals_from_Fat']
 print(Cals_per_top_five)
+
+print(Cals_per_top_five['Perc_Cals_from_Fat'] > 40)
+
+Cals_per_top_five.plot(x='Item', y=["Perc_Cals_from_Fat","Perc_Cals_Other"], kind='bar')
+plt.ylabel('Percentage')
+plt.title("Percentage Calories from Fat of top five Calorie items")
+plt.show()
+
+
+
 
 
 
