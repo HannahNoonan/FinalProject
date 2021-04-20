@@ -5,9 +5,15 @@ import seaborn as sns
 
 McDonalds_menu = pd.read_csv("McDonald's Nutritional Info.csv")
 
+# check null values
+print(McDonalds_menu.isnull().sum())
+
 print(McDonalds_menu.head())
 
 McDonalds_menu.info()
+
+
+#First - Highest Calorie item per category
 
 calories_per_item = McDonalds_menu[["Category", "Item", "Calories"]]
 print(calories_per_item)
@@ -27,16 +33,12 @@ plt.show()
 
 
 
-
-
-
 # Second - %fat in the top 5 calorie items
 
 Fat_Calorie_items = McDonalds_menu[["Category", "Item", "Calories", "Calories from Fat"]].sort_values([
     "Calories","Calories from Fat", "Item", "Category"],
     ascending=[False, False, True, True]).drop_duplicates("Category").head(5)
 print(Fat_Calorie_items)
-
 
 Item = ["Chicken McNuggets (40 piece)", "Big Breakfast with Hotcakes (Large Biscuit)",
          "McFlurry with M&M’s Candies (Medium)", "Frappé Chocolate Chip (Large)",
@@ -64,6 +66,31 @@ Cals_per_top_five.plot(x='Item', y=["Perc_Cals_from_Fat","Perc_Cals_Other"], kin
 plt.ylabel('Percentage')
 plt.title("Percentage Calories from Fat of top five Calorie items")
 plt.show()
+
+# Third - Average Cals in each category Piechart
+
+Cat_sorted = McDonalds_menu.set_index("Category").sort_index()
+print(Cat_sorted.loc[:, "Calories"])
+
+avg_cals_by_category = np.round(Cat_sorted.groupby("Category")["Calories"].mean())
+print(avg_cals_by_category)
+
+avg_cals_by_category.plot(kind='pie', subplots=True, figsize=(8, 8))
+plt.title("Pie Chart of Average Calories per Category")
+plt.ylabel("")
+plt.show()
+
+Chicken_and_Fish = 553
+
+if Chicken_and_Fish <= 250 :
+    print("The avg calories in this category is less than 250")
+elif Chicken_and_Fish <= 500 :
+    print("The avg calories in this category is less than 500")
+else :
+    print("The avg calories in this category is over 500")
+
+
+
 
 
 
