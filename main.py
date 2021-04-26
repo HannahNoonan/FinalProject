@@ -103,7 +103,7 @@ for x in avg_cals_list:
     print("The avg cals in the " + x[0] + " category is " + str(x[1]) + " cals")
 
 
-# 4 sodium
+# 4 Sodium content across all categories and % daily allowance
 
 fig, ax = plt.subplots(1, 2)
 ax[0].scatter(McDonalds_menu['Category'], McDonalds_menu['Sodium'], color='b')
